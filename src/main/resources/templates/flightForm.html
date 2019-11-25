@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/stylesheet.css}">
+
+</head>
+<body background="https://img.freepik.com/free-photo/airplane-taking-off-from-airport_37416-74.jpg?size=626&ext=jpg" style="background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;" >
+<div th:replace="base :: navlinks"></div>
+<br/><br>
+<div class="card mx-auto border-primary" style=" width: 30% ">
+    <div class="card-header">
+        <h5>Flight Form</h5>
+    </div>
+    <div class="card-body ">
+
+        <form th:action="@{/process}" th:object="${flight}" method="post" enctype="multipart/form-data">
+
+            <input type="hidden" th:field="*{id}"/>
+            <input type="hidden" th:field="*{flightshot}" />
+            Departing Airport : <input type="text" class="form-control form-control-sm" th:field="*{departingAirport}">
+            <span th:if="${#fields.hasErrors('departingAirport')}"></span><br/>
+            Arriving Airport : <input class="form-control" type="text" th:field="*{arrivingAirport}">
+            <span th:if="${#fields.hasErrors('arrivingAirport')}"></span><br/>
+            Price : <input class="form-control form-control-sm" placeholder="" type="text" th:field="*{price}">
+            <span th:if="${#fields.hasErrors('price')}"></span><br/>
+            Date : <input class="form-control form-control-sm" placeholder="" type="text" th:field="*{date}">
+            <span th:if="${#fields.hasErrors('date')}"></span><br/>
+            Flight Number : <input class="form-control form-control-sm" placeholder="" type="text" th:field="*{flightNumber}">
+            <span th:if="${#fields.hasErrors('flightNumber')}"></span><br/>
+            Airline : <input class="form-control form-control-sm" placeholder="" type="text" th:field="*{airline}">
+            <span th:if="${#fields.hasErrors('airline')}"></span><br/>
+            Image : <input type="file" name="file"><br/><br/>
+            <div th:if="${flight.flightshot} !=null">
+                <img th:src="${flight.flightshot}">
+            </div>
+            <div class = "text-center">
+                <button class="btn btn-lg button-co"  type="submit" >Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div th:replace="base :: footer"></div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
